@@ -142,13 +142,13 @@ app.get("/profile/:first/:last", (req, res) => {
 
 // Route param middleware example: /users/42
 app.param("userId", (req, res, next, userId) => {
-  const userIdNorm = String(userId).trim();
-  const userIdNum = Number(userIdNorm);
+  const userIdNum = Number(userId);
 
   if (!Number.isInteger(userIdNum) || userIdNum <= 0) {
-    return res
-      .status(400)
-      .json({ ok: false, error: "userId must be positive number" });
+    return res.status(400).json({
+      ok: false,
+      error: "userId must be positive number",
+    });
   }
 
   req.userIdNum = userIdNum;
